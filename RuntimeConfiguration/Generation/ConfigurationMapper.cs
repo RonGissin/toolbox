@@ -9,13 +9,12 @@ namespace ToolBox.RuntimeConfiguration.Generation
 {
     public class ConfigurationMapper : IConfigurationMapper
     {
-        public TConfig MapFromJson<TConfig>(JsonObject config, JsonObject combination, ConfigurationHierarchy hierarchy)
+        public object MapFromJson(Type configurationType, JsonObject config, JsonObject combination, ConfigurationHierarchy hierarchy)
         {
             // Get the type and create an instance of the configuration class
-            var configType = typeof(TConfig);
-            var configInstance = (TConfig)Activator.CreateInstance(configType);
+            var configInstance = Activator.CreateInstance(configurationType);
 
-            foreach (var property in configType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            foreach (var property in configurationType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 // Get the property name
                 var propertyName = property.Name;
@@ -55,7 +54,7 @@ namespace ToolBox.RuntimeConfiguration.Generation
                     }
                     else
                     {
-                        throw new InvalidOperationException($"Property {property.Name} in configuration {nameof(TConfig)} is missing the 'value' property.");
+                        throw new InvalidOperationException($"Property {property.Name} in configuration {configurationType.Name} is missing the 'value' property.");
                     }
                 }
             }

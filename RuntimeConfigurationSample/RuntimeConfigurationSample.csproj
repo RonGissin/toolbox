@@ -7,4 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RuntimeConfiguration\RuntimeConfiguration.csproj" />
+  </ItemGroup>
+
+  <Import Project="../RuntimeConfiguration/ToolBox.RuntimeConfiguration.targets" />
+
+
 </Project>
