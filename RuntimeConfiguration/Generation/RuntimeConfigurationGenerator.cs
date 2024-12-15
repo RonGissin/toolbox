@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using System.Text;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using ToolBox.RuntimeConfiguration.AppSettings;
 using ToolBox.RuntimeConfiguration.Attributes;
@@ -20,13 +22,39 @@ public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
 
     public void GenerateConfigurations(RuntimeConfigurationGenerationOptions options)
     {
+        var combinations = BuildCombinations(options);
+
+        WriteAppSettings(combinations, options.OutputDirectoryPath);
+    }
+
+    private void WriteAppSettings(Dictionary<string, List<object>> combinations, string outputPath)
+    {
+        foreach (var combination in combinations)
+        {
+            var appSettings = new JsonObject();
+
+            foreach (var configuration in combination.Value)
+            {
+                appSettings.Add(
+                    configuration.GetType().Name,
+                    JsonSerializer.Serialize(combination, configuration.GetType()));
+            }
+
+            _appSettingsWriter.WriteSettings(outputPath, $"appsettings.{combination.Key}.json", appSettings);
+        }
+    }
+
+    private Dictionary<string, List<object>> BuildCombinations(RuntimeConfigurationGenerationOptions options)
+    {
+        Dictionary<string, List<object>> combinations = new();
+
         var hierarchy = _hierarchyLoader.LoadHierarchy(options.HierarchyFilePath);
 
         var configurationTypes = GetConfigurationTypes(options.AssembliesToSearch);
 
         foreach (var combination in hierarchy.Combinations)
         {
-            List<object> configurations = new ();
+            List<object> configurations = new();
 
             foreach (var type in configurationTypes)
             {
@@ -38,9 +66,24 @@ public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
 
                 configurations.Add(configuration);
             }
+
+            combinations.Add(GetCombinationIdentifier(combination), configurations);
         }
+
+        return combinations;
     }
-        
+
+    private string GetCombinationIdentifier(JsonObject combination)
+    {
+        StringBuilder sb = new();
+
+        foreach (var (key, value) in combination)
+        {
+            sb.Append($".{value}");
+        }
+
+        return sb.ToString();
+    }
 
     private List<Type> GetConfigurationTypes(List<Assembly> assemblies)
     {
