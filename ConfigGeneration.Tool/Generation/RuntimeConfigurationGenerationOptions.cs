@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToolBox.RuntimeConfiguration.Generation
+namespace ToolBox.ConfigGeneration.Tool.Generation
 {
     public record RuntimeConfigurationGenerationOptions
     {

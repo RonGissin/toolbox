@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace ToolBox.RuntimeConfiguration.AppSettings
+namespace ToolBox.ConfigGeneration.Tool.AppSettings
 {
     public class AppSettingsFileWriter : IAppSettingsFileWriter
     {

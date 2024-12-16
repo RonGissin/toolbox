@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ToolBox.RuntimeConfiguration.Attributes;
+using ToolBox.ConfigGeneration.Attributes;
 
-namespace RuntimeConfigurationSample
+namespace ToolBox.RuntimeConfigurationSample.src.configuration
 {
     [RuntimeConfiguration]
     public class MyRuntimeConfiguration

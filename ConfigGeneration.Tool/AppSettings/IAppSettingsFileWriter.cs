@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
-namespace ToolBox.RuntimeConfiguration.AppSettings
+namespace ToolBox.ConfigGeneration.Tool.AppSettings
 {
     public interface IAppSettingsFileWriter
     {

@@ -2,11 +2,11 @@
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using ToolBox.RuntimeConfiguration.AppSettings;
-using ToolBox.RuntimeConfiguration.Attributes;
-using ToolBox.RuntimeConfiguration.Hierarchy;
+using ToolBox.ConfigGeneration.Attributes;
+using ToolBox.ConfigGeneration.Tool.AppSettings;
+using ToolBox.ConfigGeneration.Tool.Hierarchy;
 
-namespace ToolBox.RuntimeConfiguration.Generation;
+namespace ToolBox.ConfigGeneration.Tool.Generation;
 
 public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
 {

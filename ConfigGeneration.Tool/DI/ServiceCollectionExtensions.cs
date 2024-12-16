@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToolBox.ConfigGeneration.DI
+namespace ToolBox.ConfigGeneration.Tool.DI
 {
     public static class ServiceCollectionExtensions
     {

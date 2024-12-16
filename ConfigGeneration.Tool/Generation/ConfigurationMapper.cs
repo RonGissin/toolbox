@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json.Nodes;
-using ToolBox.RuntimeConfiguration.Hierarchy;
+using ToolBox.ConfigGeneration.Tool.Hierarchy;
 
-namespace ToolBox.RuntimeConfiguration.Generation
+namespace ToolBox.ConfigGeneration.Tool.Generation
 {
     public class ConfigurationMapper : IConfigurationMapper
     {

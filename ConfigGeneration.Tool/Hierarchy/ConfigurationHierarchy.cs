@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Nodes;
 
-namespace ToolBox.RuntimeConfiguration.Hierarchy;
+namespace ToolBox.ConfigGeneration.Tool.Hierarchy;
 
 public class ConfigurationHierarchy
 {

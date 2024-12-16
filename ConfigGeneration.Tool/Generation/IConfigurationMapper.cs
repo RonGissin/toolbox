@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
-using ToolBox.RuntimeConfiguration.Hierarchy;
+using ToolBox.ConfigGeneration.Tool.Hierarchy;
 
-namespace ToolBox.RuntimeConfiguration.Generation
+namespace ToolBox.ConfigGeneration.Tool.Generation
 {
     public interface IConfigurationMapper
     {

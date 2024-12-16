@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToolBox.RuntimeConfiguration.Hierarchy
+namespace ToolBox.ConfigGeneration.Tool.Hierarchy
 {
     public interface IHierarchyLoader
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace ToolBox.RuntimeConfiguration.Hierarchy;
+namespace ToolBox.ConfigGeneration.Tool.Hierarchy;
 
 public class DefaultHierarchyLoader : IHierarchyLoader
 {
