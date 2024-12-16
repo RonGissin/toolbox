@@ -12,6 +12,6 @@
     </Target>
 
     <ItemGroup>
-      <ProjectReference Include="..\RuntimeConfiguration\ConfigGeneration.csproj" />
+      <ProjectReference Include="..\ConfigGeneration\ConfigGeneration.csproj" />
     </ItemGroup>
 </Project>
