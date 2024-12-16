@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConfigGeneration", "ConfigG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigGeneration", "RuntimeConfiguration\ConfigGeneration.csproj", "{9ABE4670-08DC-4BA7-8D90-6340A65791FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolBox.RuntimeConfigurationSample", "RuntimeConfigurationSample\ToolBox.RuntimeConfigurationSample.csproj", "{9F398243-6293-46A8-BD1C-123F04D38AD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigGenerationSample", "RuntimeConfigurationSample\ConfigGenerationSample.csproj", "{9F398243-6293-46A8-BD1C-123F04D38AD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigGeneration.Tool", "ConfigGeneration.Tool\ConfigGeneration.Tool.csproj", "{8A17ED93-A0A4-4A92-8FE4-7F20FA43441B}"
 EndProject
