@@ -37,7 +37,7 @@ public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
             {
                 appSettings.Add(
                     configuration.GetType().Name,
-                    JsonSerializer.Serialize(combination, configuration.GetType()));
+                    JsonSerializer.SerializeToNode(combination));
             }
 
             _appSettingsWriter.WriteSettings(outputPath, $"appsettings.{combination.Key}.json", appSettings);
@@ -79,8 +79,10 @@ public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
 
         foreach (var (key, value) in combination)
         {
-            sb.Append($".{value}");
+            sb.Append($"{value}.");
         }
+
+        sb.Append("json");
 
         return sb.ToString();
     }

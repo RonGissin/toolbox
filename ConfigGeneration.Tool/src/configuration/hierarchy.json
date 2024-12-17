@@ -1,0 +1,24 @@
+{
+  "hierarchy": [
+    "environment",
+    "region"
+  ],
+  "combinations": [
+    {
+      "environment": "development",
+      "region": "eastus"
+    },
+    {
+      "environment": "development",
+      "region": "westeurope"
+    },
+    {
+      "environment": "production",
+      "regions": "eastus"
+    },
+    {
+      "environment": "production",
+      "region": "westeurope"
+    }
+  ]
+}
