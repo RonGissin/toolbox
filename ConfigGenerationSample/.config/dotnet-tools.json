@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "configgeneration.tool": {
+      "version": "1.0.0",
+      "commands": [
+        "toolbox-config-gen"
+      ],
+      "rollForward": false
+    }
+  }
+}
