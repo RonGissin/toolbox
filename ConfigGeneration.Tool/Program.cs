@@ -48,7 +48,9 @@ rootCommand.SetHandler((inputDir, outputDir, hierarchyPath, assembliesToSearch) 
             configMapper,
             appSettingsWriter);
 
-        var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+        var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies()
+            .Where(assembly => !assembly.FullName.EndsWith("ConfigGeneration.Tool"))
+            .ToList();
 
         if (assembliesToSearch.Any())
         {

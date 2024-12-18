@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ToolBox.ConfigGeneration.Attributes;
 
-namespace ToolBox.ConfigGeneration.src.configuration
+namespace ToolBox.RuntimeConfigurationSample.src.configuration
 {
     [RuntimeConfiguration]
     public class MyRuntimeConfiguration

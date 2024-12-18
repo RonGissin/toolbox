@@ -27,7 +27,7 @@ public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
         WriteAppSettings(combinations, options.OutputDirectoryPath);
     }
 
-    private void WriteAppSettings(Dictionary<string, List<object>> combinations, string outputPath)
+    private void WriteAppSettings(Dictionary<string, Dictionary<string, object>> combinations, string outputPath)
     {
         foreach (var combination in combinations)
         {
@@ -35,18 +35,20 @@ public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
 
             foreach (var configuration in combination.Value)
             {
+                var configName = configuration.Key;
+                
                 appSettings.Add(
-                    configuration.GetType().Name,
-                    JsonSerializer.SerializeToNode(combination));
+                    configName,
+                    JsonSerializer.SerializeToNode(combination.Value[configName]));
             }
 
-            _appSettingsWriter.WriteSettings(outputPath, $"appsettings.{combination.Key}.json", appSettings);
+            _appSettingsWriter.WriteSettings(outputPath, $"appsettings.{combination.Key}", appSettings);
         }
     }
 
-    private Dictionary<string, List<object>> BuildCombinations(RuntimeConfigurationGenerationOptions options)
+    private Dictionary<string, Dictionary<string, object>> BuildCombinations(RuntimeConfigurationGenerationOptions options)
     {
-        Dictionary<string, List<object>> combinations = new();
+        Dictionary<string, Dictionary<string, object>> combinations = new();
 
         var hierarchy = _hierarchyLoader.LoadHierarchy(options.HierarchyFilePath);
 
@@ -54,7 +56,7 @@ public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
 
         foreach (var combination in hierarchy.Combinations)
         {
-            List<object> configurations = new();
+            Dictionary<string, object> configurations = new();
 
             foreach (var type in configurationTypes)
             {
@@ -64,7 +66,7 @@ public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
 
                 var configuration = _configurationMapper.MapFromJson(type, jsonObject, combination, hierarchy);
 
-                configurations.Add(configuration);
+                configurations.Add(configName, configuration);
             }
 
             combinations.Add(GetCombinationIdentifier(combination), configurations);
@@ -95,7 +97,9 @@ public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
         {
             var types = assembly
                 .GetTypes()
-                .Where(t => t.IsDefined(typeof(RuntimeConfigurationAttribute)));
+                .Where(
+                    t => t.GetCustomAttributes()
+                    .Any(a => a.GetType().Name.EndsWith("RuntimeConfigurationAttribute")));
 
             configurationTypes.AddRange(types);
         }
