@@ -7,9 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-    <Target Name="RunConfigTool" BeforeTargets="BeforeBuild">
-        <Exec Command="dotnet tool run toolbox-config-gen --inputDirectoryPath $(ProjectDir)src/configuration --outputDirectoryPath $(ProjectDir)src/configuration/generated --hierarchyFilePath $(ProjectDir)src/configuration/hierarchy.json" />
-    </Target>
+    <!-- Uncomment for testing the tool on the sample project -->
+    <!--<Target Name="RunConfigTool" BeforeTargets="BeforeBuild">
+        <Exec Command="dotnet tool run toolbox-config-gen -inputDirectoryPath $(ProjectDir)src/configuration -outputDirectoryPath $(ProjectDir)src/configuration/generated -hierarchyFilePath $(ProjectDir)src/configuration/hierarchy.json" />
+    </Target>-->
     
 
     <ItemGroup>
