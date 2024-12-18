@@ -3,10 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <PackAsTool>true</PackAsTool>
+    <IsPackable>true</IsPackable>
     <TargetFramework>net8.0</TargetFramework>
     <ToolCommandName>toolbox-config-gen</ToolCommandName>
-    <Version>1.0.3</Version>
-    <Authors>Ron Gissin</Authors>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ToolBox.ConfigGeneration.Tool</RootNamespace>
@@ -19,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConfigGeneration\ConfigGeneration.csproj" />
+    <ProjectReference Include="..\Safety\Safety.csproj" />
   </ItemGroup>
 
     <ItemGroup>

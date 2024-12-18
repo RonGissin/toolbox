@@ -4,8 +4,6 @@
     <PackageId>ToolBox.ConfigGeneration</PackageId>
     <TargetFramework>net8.0</TargetFramework>
     <IsPackable>true</IsPackable>
-    <Version>1.0.0</Version>
-    <Authors>Ron Gissin</Authors>
     <Description>Generates multiple appsettings files accorindg to a user defined hierarchy.</Description>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>

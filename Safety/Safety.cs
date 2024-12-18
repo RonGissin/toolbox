@@ -5,12 +5,24 @@ namespace Safety
     public class Safety
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T AssertNotNull<T>(T argument, [CallerArgumentExpression("argument")] string argumentName = null)
+        public static T ThrowIfNull<T>(T argument, [CallerArgumentExpression("argument")] string argumentName = null)
             where T : class
         {
             if (argument == null)
             {
                 throw new ArgumentNullException(argumentName);
+            }
+
+            return argument;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ThrowIfNullOrEmpty<T>(string argument, [CallerArgumentExpression("argument")] string argumentName = null)
+            where T : class
+        {
+            if (string.IsNullOrWhiteSpace(argument))
+            {
+                throw new ArgumentException(argumentName);
             }
 
             return argument;

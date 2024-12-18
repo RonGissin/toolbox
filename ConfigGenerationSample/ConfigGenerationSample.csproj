@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -11,7 +12,6 @@
     <!--<Target Name="RunConfigTool" BeforeTargets="BeforeBuild">
         <Exec Command="dotnet tool run toolbox-config-gen -inputDirectoryPath $(ProjectDir)src/configuration -outputDirectoryPath $(ProjectDir)src/configuration/generated -hierarchyFilePath $(ProjectDir)src/configuration/hierarchy.json" />
     </Target>-->
-    
 
     <ItemGroup>
       <ProjectReference Include="..\ConfigGeneration\ConfigGeneration.csproj" />

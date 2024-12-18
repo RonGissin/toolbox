@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <!-- Centralized version for all projects -->
+    <Version>1.0.3</Version>
+    <Authors>Ron Gissin</Authors>
+  </PropertyGroup>
+</Project>
