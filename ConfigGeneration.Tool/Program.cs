@@ -1,19 +1,20 @@
 ﻿// Define command-line options with default values
 using System.CommandLine;
+using System.Reflection;
 using ToolBox.ConfigGeneration.Tool.AppSettings;
 using ToolBox.ConfigGeneration.Tool.Generation;
 using ToolBox.ConfigGeneration.Tool.Hierarchy;
 
-var inputDirectoryOption = new Option<string>(
-    "--inputDirectoryPath",
+var jsonConfigsDirectory = new Option<string>(
+    "--jsonConfigsDirectory",
     () => "./src/configuration",
-    "Path to the input directory"
+    "Path to the directory containing JSON configuration files."
 );
 
 var outputDirectoryOption = new Option<string>(
-    "--outputDirectoryPath",
+    "--settingsOutputDirectory",
     () => "./src/configuration/generated",
-    "Path to the output directory"
+    "Path to the output directory for the generated settings files."
 );
 
 var hierarchyFileOption = new Option<string>(
@@ -22,22 +23,21 @@ var hierarchyFileOption = new Option<string>(
     "Path to the hierarchy file"
 );
 
-var assembliesOption = new Option<string[]>(
-    "--assembliesToSearch",
-    () => Array.Empty<string>(),
-    "Comma-separated list of assembly names to search (default: loaded assemblies)"
+var assemblyOption = new Option<string>(
+    "--assemblyToLoadPath",
+    "Path to the assembly to load and search."
 );
 
 // Create the root command
 var rootCommand = new RootCommand("GenerateConfigTool - A tool for generating configurations during builds.")
     {
-        inputDirectoryOption,
+        jsonConfigsDirectory,
         outputDirectoryOption,
         hierarchyFileOption,
-        assembliesOption
+        assemblyOption
     };
 
-rootCommand.SetHandler((inputDir, outputDir, hierarchyPath, assembliesToSearch) =>
+rootCommand.SetHandler((inputDir, outputDir, hierarchyPath, assemblyToLoad) =>
     {
         var hierarchyLoader = new DefaultHierarchyLoader();
         var configMapper = new ConfigurationMapper();
@@ -48,17 +48,11 @@ rootCommand.SetHandler((inputDir, outputDir, hierarchyPath, assembliesToSearch) 
             configMapper,
             appSettingsWriter);
 
+        var execAssembly = Assembly.LoadFrom(assemblyToLoad);
         var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies()
-            .Where(assembly => !assembly.FullName.EndsWith("ConfigGeneration.Tool"))
+            .Union(new[] { execAssembly })
             .ToList();
-
-        if (assembliesToSearch.Any())
-        {
-            loadedAssemblies = loadedAssemblies
-                .Where(a => assembliesToSearch.Contains(a.FullName))
-                .ToList();
-        }
-
+        
         var options = new RuntimeConfigurationGenerationOptions
         {
             InputDirectoryPath = inputDir,
@@ -69,6 +63,6 @@ rootCommand.SetHandler((inputDir, outputDir, hierarchyPath, assembliesToSearch) 
 
         configGenerator.GenerateConfigurations(options);
     },
-    inputDirectoryOption, outputDirectoryOption, hierarchyFileOption, assembliesOption);
+    jsonConfigsDirectory, outputDirectoryOption, hierarchyFileOption, assemblyOption);
 
 await rootCommand.InvokeAsync(args);
