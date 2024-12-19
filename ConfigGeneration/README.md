@@ -98,23 +98,30 @@ Read below section to learn how to **generate the configurations**
 
 
 ```aiignore
-<Target Name="RunConfigTool" BeforeTargets="BeforeBuild">
-    <!-- Log message before checking tool manifest -->
-    <Message Importance="High" Text="Checking if tool manifest exists..." />
+<PropertyGroup>
+        <ConfigGenVersion>1.0.9</ConfigGenVersion>
+        <JsonConfigsDirectory>$(ProjectDir)configurations</JsonConfigsDirectory>
+        <SettingsOutputDirectory>configurations/generated</SettingsOutputDirectory>
+        <HierarchyFilePath>$(ProjectDir)configurations/hierarchy.json</HierarchyFilePath>
+        <AssemblyToLoadPath>$(ProjectDir)bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).dll</AssemblyToLoadPath>
+    </PropertyGroup>
+    
+    <Target Name="RunConfigTool" AfterTargets="Build">
+        <Message Importance="High" Text="Checking if tool manifest exists..." />
+        <Exec Command="dotnet new tool-manifest" ContinueOnError="true" />
+        <Message Importance="High" Text="Ensuring toolbox-config-gen is installed..." />
+        <Exec Command="dotnet tool install --local ConfigGeneration.Tool --version $(ConfigGenVersion)" ContinueOnError="true" />
+        <Message Importance="High" Text="Running toolbox-config-gen to generate configuration..." />
+        <Exec Command="
+            dotnet tool run toolbox-config-gen --jsonConfigsDirectory $(JsonConfigsDirectory) --settingsOutputDirectory $(ProjectDir)$(SettingsOutputDirectory) --hierarchyFilePath $(HierarchyFilePath) --assemblyToLoadPath $(AssemblyToLoadPath)" />
+    </Target>
+    <Target Name="CopyGeneratedJson" AfterTargets="RunConfigTool">
+        <Message Importance="High" Text="Copying the generated settings files..." />
+        <ItemGroup>
+            <GeneratedJsonFiles Include="$(ProjectDir)$(SettingsOutputDirectory)/**/*.json" />
+        </ItemGroup>
 
-    <!-- Ensure tool manifest is initialized - if exists, will not override -->
-    <Exec Command="dotnet new tool-manifest" ContinueOnError="true" />
-
-    <!-- Log message before installing the tool -->
-    <Message Importance="High" Text="Ensuring toolbox-config-gen is installed..." />
-
-    <!-- Ensure the tool is installed -->
-    <Exec Command="dotnet tool install toolbox-config-gen --local" ContinueOnError="true" />
-
-    <!-- Log message before running the tool -->
-    <Message Importance="High" Text="Running toolbox-config-gen to generate configuration..." />
-
-    <!-- Run the configuration generation tool -->
-    <Exec Command="dotnet tool run toolbox-config-gen --inputDirectoryPath $(ProjectDir)src/configuration --outputDirectoryPath $(ProjectDir)src/configuration/generated --hierarchyFilePath $(ProjectDir)src/configuration/hierarchy.json" />
-  </Target>
+        <!-- Copy files to the output directory -->
+        <Copy SourceFiles="@(GeneratedJsonFiles)" DestinationFolder="$(OutputPath)$(SettingsOutputDirectory)" />
+    </Target>
 ```
