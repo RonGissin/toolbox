@@ -5,6 +5,7 @@ using System.Text.Json.Nodes;
 using ToolBox.ConfigGeneration.Attributes;
 using ToolBox.ConfigGeneration.Tool.AppSettings;
 using ToolBox.ConfigGeneration.Tool.Hierarchy;
+using ToolBox.Safety;
 
 namespace ToolBox.ConfigGeneration.Tool.Generation;
 
@@ -22,6 +23,7 @@ public class RuntimeConfigurationGenerator : IRuntimeConfigurationGenerator
 
     public void GenerateConfigurations(RuntimeConfigurationGenerationOptions options)
     {
+        Safe.ThrowIfNull(options);
         var combinations = BuildCombinations(options);
 
         WriteAppSettings(combinations, options.OutputDirectoryPath);

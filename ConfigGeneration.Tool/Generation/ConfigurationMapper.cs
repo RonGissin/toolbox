@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json.Nodes;
 using ToolBox.ConfigGeneration.Tool.Hierarchy;
+using ToolBox.Safety;
 
 namespace ToolBox.ConfigGeneration.Tool.Generation
 {
@@ -11,6 +12,11 @@ namespace ToolBox.ConfigGeneration.Tool.Generation
     {
         public object MapFromJson(Type configurationType, JsonObject config, JsonObject combination, ConfigurationHierarchy hierarchy)
         {
+            Safe.ThrowIfNull(configurationType);
+            Safe.ThrowIfNull(config);
+            Safe.ThrowIfNull(combination);
+            Safe.ThrowIfNull(hierarchy);
+            
             // Get the type and create an instance of the configuration class
             var configInstance = Activator.CreateInstance(configurationType);
 

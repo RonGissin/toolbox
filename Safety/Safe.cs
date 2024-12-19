@@ -1,8 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Safety
+namespace ToolBox.Safety
 {
-    public class Safety
+    public static class Safe
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T ThrowIfNull<T>(T argument, [CallerArgumentExpression("argument")] string argumentName = null)
@@ -17,8 +17,7 @@ namespace Safety
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ThrowIfNullOrEmpty<T>(string argument, [CallerArgumentExpression("argument")] string argumentName = null)
-            where T : class
+        public static string ThrowIfNullOrEmpty(string argument, [CallerArgumentExpression("argument")] string argumentName = null)
         {
             if (string.IsNullOrWhiteSpace(argument))
             {

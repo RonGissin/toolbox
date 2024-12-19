@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
     <TargetFramework>net8.0</TargetFramework>
     <ToolCommandName>toolbox-config-gen</ToolCommandName>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ToolBox.ConfigGeneration.Tool</RootNamespace>
     <Description>A tool for generating configurations.</Description>
