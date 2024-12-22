@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using ToolBox.ConfigGeneration.Tool.Hierarchy;
 using ToolBox.Safety;
@@ -35,7 +36,7 @@ namespace ToolBox.ConfigGeneration.Tool.Generation
                     {
                         if (currentNode.TryGetPropertyValue("value", out var defaultNode))
                         {
-                            var typedValue = Convert.ChangeType(defaultNode.ToString(), property.PropertyType);
+                            var typedValue = JsonSerializer.Deserialize(defaultNode, property.PropertyType);
                             property.SetValue(configInstance, typedValue);
 
                             break;
