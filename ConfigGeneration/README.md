@@ -33,16 +33,24 @@ Below is the example for the `RedisConfiguration.json`:
 `RedisConfiguration`
 ```aiignore
 {
-    "RedisUri": {
-        "development": {
-            "eastus": "https://...",
-            "westeurope": "https://..."
-        },
-        "production": {
-            "eastus": "https://...",
-            "westeurope": "https://..."
-        }
+  "RedisUri": {
+    "development": {
+      "eastus": {
+        "value": "https://..."
+      },
+      "westeurope": {
+        "value": "https://..."
+      }
+    },
+    "production": {
+      "eastus": {
+        "value": "https://..."
+      },
+      "westeurope": {
+        "value": "https://..."
+      }
     }
+  }
 }
 ```
 
