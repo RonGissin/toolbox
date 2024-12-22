@@ -100,7 +100,7 @@ To take care of generating the appropriate appsettings files out of your configu
 
 
 ```aiignore
-<PropertyGroup>
+    <PropertyGroup>
         <ConfigGenVersion>1.0.9</ConfigGenVersion>
         <JsonConfigsDirectory>$(ProjectDir)configurations</JsonConfigsDirectory>
         <SettingsOutputDirectory>configurations/generated</SettingsOutputDirectory>
@@ -108,6 +108,10 @@ To take care of generating the appropriate appsettings files out of your configu
         <AssemblyToLoadPath>$(ProjectDir)bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).dll</AssemblyToLoadPath>
     </PropertyGroup>
     
+    <ItemGroup>
+        <PackageReference Include="ToolBox.ConfigGeneration" Version="$(ConfigGenVersion)" />
+    </ItemGroup>
+
     <Target Name="RunConfigTool" AfterTargets="Build">
         <Message Importance="High" Text="Checking if tool manifest exists..." />
         <Exec Command="dotnet new tool-manifest" ContinueOnError="true" />
@@ -137,12 +141,15 @@ The code you see does the following:
    4. `HierarchyFilePath` - The path to your `hierarchy.json` file.
    5. `AssemblyToLoadPath` - The path to your executable assembly (the one which is your app's entrypoint).
 
-2. Declares a target which:
+2. Adds a package reference to the `ToolBox.ConfigGeneration` package.\
+   Note: The version of the package is defined by the `ConfigGenVersion` variable, and must match between the tool and the library.
+
+3. Declares a target which:
    1. Creates a new tool manifest for your project (if not exists).
    2. Installs the `ConfigGeneration.Tool` dotnet tool locally in your project.
    3. Runs the `toolbox-config-gen` command with your configured msbuild variables to generate the settings files.
 
-3. Declares another target which copies the generated settings files to your output directory.\
+4. Declares another target which copies the generated settings files to your output directory.\
 This is critical to enable your application to read them during runtime.
 
 
