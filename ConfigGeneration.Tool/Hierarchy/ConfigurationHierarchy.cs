@@ -6,8 +6,8 @@ namespace ToolBox.ConfigGeneration.Tool.Hierarchy;
 public class ConfigurationHierarchy
 {
     [JsonPropertyName("hierarchy")]
-    public List<string> Hierarchy { get; set; }
+    public required List<string> Hierarchy { get; init; }
 
     [JsonPropertyName("combinations")]
-    public List<JsonObject> Combinations { get; set; }
+    public required List<JsonObject> Combinations { get; init; }
 }

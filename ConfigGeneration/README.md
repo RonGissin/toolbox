@@ -96,6 +96,8 @@ This means there is a total of 4 distinct environments - each deserving of its o
 Read below section to learn how to **generate the configurations**
 ## Configuration generation
 
+To take care of generating the appropriate appsettings files out of your configurations, you can add the following code to your executable's `.csproj` file.
+
 
 ```aiignore
 <PropertyGroup>
@@ -124,4 +126,71 @@ Read below section to learn how to **generate the configurations**
         <!-- Copy files to the output directory -->
         <Copy SourceFiles="@(GeneratedJsonFiles)" DestinationFolder="$(OutputPath)$(SettingsOutputDirectory)" />
     </Target>
+```
+
+The code you see does the following:
+
+1. Declares some variables to be used in the following target.
+   1. `ConfigGenVersion` - The version of `ConfigGeneration.Tool` to use for the generation process.
+   2. `JsonConfigsDirectory` - The root directory in which to search for configuration files (`.json` files).
+   3. `SettingsOutputDirectory` - The directory in which to generate the `appsettings` files.
+   4. `HierarchyFilePath` - The path to your `hierarchy.json` file.
+   5. `AssemblyToLoadPath` - The path to your executable assembly (the one which is your app's entrypoint).
+
+2. Declares a target which:
+   1. Creates a new tool manifest for your project (if not exists).
+   2. Installs the `ConfigGeneration.Tool` dotnet tool locally in your project.
+   3. Runs the `toolbox-config-gen` command with your configured msbuild variables to generate the settings files.
+
+3. Declares another target which copies the generated settings files to your output directory.\
+This is critical to enable your application to read them during runtime.
+
+
+Once you add this to your `.csproj`, build the project and validate that the generation succeeded.
+
+## Using the generated files in your application
+
+Now, say you have accomplished the following steps:
+
+Created an app --> added the tool using the provided targets --> successfully built the project.
+
+The next step is to enable your application to read the generated configurations.
+
+See the example Program.cs file below:
+
+```aiignore
+using System.Text.Json;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Test.configurations;
+using ToolBox.ConfigGeneration.DI;
+
+Environment.SetEnvironmentVariable("RedisConfiguration:RedisUri", "SomeOverrideValue");
+
+var host = Host.CreateDefaultBuilder(args)
+    .ConfigureAppConfiguration((context, config) =>
+    {
+        // Add the generated file - can use environment variables to point to the correct one per combination.
+        config.AddJsonFile("./configurations/generated/appsettings.development.eastus.json", optional: false, reloadOnChange: true);
+        
+        // Allow overriding specific values using environment variables like the one above !
+        config.AddEnvironmentVariables();
+    })
+    .ConfigureServices((context, services) =>
+    {
+        // Automatically binds all configurations with the `RuntimeConfigurationAttribute` to corresponding json values.
+        services.AutoRegisterConfigurations(context.Configuration);
+    })
+    .Build();
+
+// Resolve services and run the application
+using var scope = host.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+// Example: Access configuration
+var myConfig = services.GetRequiredService<IOptions<RedisConfiguration>>().Value;
+
+Console.WriteLine($"RedisConfiguration is {JsonSerializer.Serialize(myConfig)}.");
 ```
