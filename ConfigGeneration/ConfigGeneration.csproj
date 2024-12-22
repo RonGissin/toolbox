@@ -9,6 +9,10 @@
     <Nullable>disable</Nullable>
     <RootNamespace>ToolBox.ConfigGeneration</RootNamespace>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>
+        v.1.1.0: Added `AutoRegisterConfigurations` to enable automatic binding of configurations.
+        v.1.0.0: Initial release.
+    </PackageReleaseNotes>
   </PropertyGroup>
   
   <ItemGroup>

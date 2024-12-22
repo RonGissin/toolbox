@@ -10,6 +10,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ToolBox.ConfigGeneration.Tool</RootNamespace>
     <Description>A tool for generating configurations.</Description>
+    <PackageReleaseNotes>
+        v.1.0.9: First stable version.
+        v.1.0.0: Initial release.
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

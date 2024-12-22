@@ -12,7 +12,7 @@ var host = Host.CreateDefaultBuilder(args)
     })
     .ConfigureServices((context, services) =>
     {
-        services.AddConfigurations(context.Configuration);
+        services.AutoRegisterConfigurations(context.Configuration);
     })
     .Build();
 

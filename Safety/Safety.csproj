@@ -8,6 +8,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <RootNamespace>ToolBox.Safety</RootNamespace>
+        <PackageReleaseNotes>
+            v.1.1.0: Added new validation methods - `ThrowIfNotBetween`, `ThrowIfBelowLowerBound`, `ThrowIfAboveUpperBound`, `ThrowIfEmptyGuid`, `ThrowIfNullOrEmptyEnumerable`.
+            v.1.0.0: Initial release.
+        </PackageReleaseNotes>
     </PropertyGroup>
 
 </Project>

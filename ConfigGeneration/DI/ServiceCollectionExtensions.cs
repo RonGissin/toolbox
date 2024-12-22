@@ -7,7 +7,14 @@ namespace ToolBox.ConfigGeneration.DI
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration configuration)
+        /// <summary>
+        /// Registers all configuration class that have <see cref="RuntimeConfigurationAttribute"/> defines them.
+        /// Registration includes binding configuration to the class.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        /// <param name="configuration">The app configuration.</param>
+        /// <returns>The service collection.</returns>
+        public static IServiceCollection AutoRegisterConfigurations(this IServiceCollection services, IConfiguration configuration)
         {
             var configTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetTypes())
