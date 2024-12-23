@@ -45,5 +45,47 @@ namespace DependencyInjection
 
             return services;
         }
+
+        /// <summary>
+        /// Verifies that all services registered in the <paramref name="serviceProvider"/> can be resolved.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <returns>The verified service provider.</returns>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when a specific service cannot be resolved.
+        /// </exception>
+        public static IServiceProvider Verify(this IServiceProvider serviceProvider)
+        {
+            // Iterate over all registered services
+            var serviceDescriptors = serviceProvider.GetRequiredService<IEnumerable<ServiceDescriptor>>();
+            foreach (var serviceDescriptor in serviceDescriptors)
+            {
+                try
+                {
+                    // Skip open generic types and instances directly provided
+                    if (serviceDescriptor.ServiceType.IsGenericTypeDefinition || serviceDescriptor.ImplementationInstance != null)
+                    {
+                        continue;
+                    }
+
+                    // Attempt to resolve the service
+                    var service = serviceProvider.GetService(serviceDescriptor.ServiceType);
+
+                    // If the service is null, it may indicate an issue
+                    if (service == null)
+                    {
+                        throw new InvalidOperationException($"Failed to resolve service {serviceDescriptor.ServiceType.FullName}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log or rethrow the exception for misconfigured services
+                    throw new InvalidOperationException($"Failed to resolve service {serviceDescriptor.ServiceType.FullName}", ex);
+                }
+            }
+
+            return serviceProvider;
+        }
     }
 }
+
