@@ -56,7 +56,7 @@ namespace ToolBox.ConfigGeneration.Tool.Generation
                     // If a value was found, set it to the property
                     if (currentNode != null && currentNode.TryGetPropertyValue("value", out var finalValue))
                     {
-                        var typedValue = Convert.ChangeType(finalValue.ToString(), property.PropertyType);
+                        var typedValue = JsonSerializer.Deserialize(finalValue, property.PropertyType);
                         property.SetValue(configInstance, typedValue);
                     }
                     else
