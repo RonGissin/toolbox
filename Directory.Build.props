@@ -9,7 +9,7 @@
     <PackageIcon>toolbox.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="$(SolutionDir)LICENSE" Pack="true" PackagePath=""/>
-    <None Include="$(SolutionDir)toolbox.png" Pack="true" PackagePath=""/>
+    <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath=""/>
+    <None Include="$(MSBuildThisFileDirectory)toolbox.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
