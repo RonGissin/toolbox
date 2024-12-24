@@ -10,9 +10,11 @@
         <RootNamespace>ToolBox.Safety</RootNamespace>
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
         <PackageReleaseNotes>
-            v.1.1.0: Added new validation methods - `ThrowIfNotBetween`, `ThrowIfBelowLowerBound`, `ThrowIfAboveUpperBound`, `ThrowIfEmptyGuid`, `ThrowIfNullOrEmptyEnumerable`.
-            v.1.0.0: Initial release.
+            `v.1.4.0`: Improved nuget package metadata.
+            `v.1.1.0`: Added new validation methods - `ThrowIfNotBetween`, `ThrowIfBelowLowerBound`, `ThrowIfAboveUpperBound`, `ThrowIfEmptyGuid`, `ThrowIfNullOrEmptyEnumerable`.
+            `v.1.0.0`: Initial release.
         </PackageReleaseNotes>
+        <PackageTags>toolbox;tools;arguments;safety;null-checks</PackageTags>
     </PropertyGroup>
 
 </Project>

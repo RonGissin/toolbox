@@ -11,10 +11,12 @@
     <RootNamespace>ToolBox.ConfigGeneration.Tool</RootNamespace>
     <Description>A tool for generating configurations.</Description>
     <PackageReleaseNotes>
-        v.1.2.1: Fix tool for accepting arbitrary types for deserialization.
-        v.1.0.9: First stable version.
-        v.1.0.0: Initial release.
+        `v.1.4.0`: Improved nuget package metadata.
+        `v.1.2.1`: Fix tool for accepting arbitrary types for deserialization.
+        `v.1.0.9`: First stable version.
+        `v.1.0.0`: Initial release.
     </PackageReleaseNotes>
+    <PackageTags>toolbox;tools;configuration;appsettings</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
