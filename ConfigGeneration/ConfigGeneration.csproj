@@ -10,10 +10,12 @@
     <RootNamespace>ToolBox.ConfigGeneration</RootNamespace>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
-        v.1.1.1: Updated README.
-        v.1.1.0: Added `AutoRegisterConfigurations` to enable automatic binding of configurations.
-        v.1.0.0: Initial release.
+        `v.1.4.0`: Improved nuget package metadata.
+        `v.1.1.1`: Updated README.
+        `v.1.1.0`: Added `AutoRegisterConfigurations` to enable automatic binding of configurations.
+        `v.1.0.0`: Initial release.
     </PackageReleaseNotes>
+    <PackageTags>toolbox;tools;configuration;appsettings</PackageTags>
   </PropertyGroup>
   
   <ItemGroup>
