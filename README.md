@@ -1,6 +1,8 @@
 # ToolBox.net 🛠️
 A toolbox for implementing backend services based on dotnet.
 
+[![codecov](https://codecov.io/github/RonGissin/toolbox/graph/badge.svg?token=SJK6QXXG7T)](https://codecov.io/github/RonGissin/toolbox)
+
 ## Introduction
 
 `ToolBox` is a collection of **NuGet packages** that together speed up development in .NET.\
