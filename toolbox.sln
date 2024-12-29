@@ -24,7 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyInjection", "DependencyInjection", "{AA5D6C28-19A2-4CCA-9924-B68367100957}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection", "DependencyInjection\DependencyInjection.csproj", "{FC7B90BB-EE83-4758-B691-91E4AF11CDAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjection", "DependencyInjection\DependencyInjection.csproj", "{FC7B90BB-EE83-4758-B691-91E4AF11CDAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safety.Tests", "Safety.Tests\Safety.Tests.csproj", "{4976625B-7A08-41D0-850B-4D3F74051667}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{FC7B90BB-EE83-4758-B691-91E4AF11CDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC7B90BB-EE83-4758-B691-91E4AF11CDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC7B90BB-EE83-4758-B691-91E4AF11CDAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4976625B-7A08-41D0-850B-4D3F74051667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4976625B-7A08-41D0-850B-4D3F74051667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4976625B-7A08-41D0-850B-4D3F74051667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4976625B-7A08-41D0-850B-4D3F74051667}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{8A17ED93-A0A4-4A92-8FE4-7F20FA43441B} = {88ACCB31-42E3-4506-A91A-9046C4D56CF8}
 		{424C97B6-43F9-409F-B262-D9B037F13BB7} = {BC4A50F3-047B-4BC6-846F-9ABF4725CA72}
 		{FC7B90BB-EE83-4758-B691-91E4AF11CDAA} = {AA5D6C28-19A2-4CCA-9924-B68367100957}
+		{4976625B-7A08-41D0-850B-4D3F74051667} = {BC4A50F3-047B-4BC6-846F-9ABF4725CA72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6B5D3A7-109B-4EE2-85C6-B8D764AB1F1A}
