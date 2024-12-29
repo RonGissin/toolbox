@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build and Test
+    name: Build, Test, and Coverage
     runs-on: ubuntu-latest
 
     steps:
@@ -25,8 +25,17 @@ jobs:
       - name: Build solution
         run: dotnet build --configuration Release --no-restore
 
-      - name: Run tests
-        run: dotnet test --configuration Release --no-restore --verbosity normal
+      - name: Run tests with coverage
+        run: dotnet test --collect:"XPlat Code Coverage" --configuration Release --no-restore --verbosity normal
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./TestResults/**/*.coverage
+          flags: unittests
+          slug: RonGissin/toolbox
+          fail_ci_if_error: true
 
   pack-and-publish:
     name: Pack and Publish NuGet Packages
@@ -43,7 +52,7 @@ jobs:
 
       - name: Pack and Publish NuGet Packages
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }} # Add your NuGet API key in the repository secrets
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           for csproj in $(find . -name "*.csproj"); do
             echo "Packing $csproj"
