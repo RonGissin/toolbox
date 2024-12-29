@@ -2,6 +2,8 @@
 A toolbox for implementing backend services based on dotnet.
 
 [![codecov](https://codecov.io/github/RonGissin/toolbox/graph/badge.svg?token=SJK6QXXG7T)](https://codecov.io/github/RonGissin/toolbox)
+[![Build Status](https://github.com/RonGissin/toolbox/actions/workflows/publish-nugets.yml/badge.svg)](https://github.com/RonGissin/toolbox/actions)
+[![License](https://img.shields.io/github/license/RonGissin/toolbox.svg)](LICENSE)
 
 ## Introduction
 
