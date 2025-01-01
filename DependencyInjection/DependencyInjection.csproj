@@ -10,6 +10,7 @@
       <RootNamespace>ToolBox.DependencyInjection</RootNamespace>
       <PackageReadmeFile>README.md</PackageReadmeFile>
       <PackageReleaseNotes>
+          `v.1.5.0`: Removed `AddDecorator` - already implemented in many packages such as `Scrutor`.
           `v.1.4.0`: Improved nuget package metadata.
           `v.1.3.0`: Added `IServiceProvider.Verify` method to verify all services are registered correctly.
           `v.1.2.0`: Initial version - added `AddDecorator{TService, TDecorator}` extension.
